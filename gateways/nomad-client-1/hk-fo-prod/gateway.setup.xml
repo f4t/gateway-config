@@ -82,7 +82,7 @@
         </rule>
     </rules>
     <operatingEnvironment>
-        <gatewayName>hk-infra-prod</gatewayName>
+        <gatewayName>hk-fo-prod</gatewayName>
         <listenPorts>
             <insecure>
                 <listenPort>7101</listenPort>

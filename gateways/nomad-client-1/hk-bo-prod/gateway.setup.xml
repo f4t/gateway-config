@@ -82,10 +82,10 @@
         </rule>
     </rules>
     <operatingEnvironment>
-        <gatewayName>demo</gatewayName>
+        <gatewayName>hk-bo-prod</gatewayName>
         <listenPorts>
             <insecure>
-                <listenPort>7039</listenPort>
+                <listenPort>7103</listenPort>
             </insecure>
         </listenPorts>
     </operatingEnvironment>
