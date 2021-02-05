@@ -83,10 +83,5 @@
     </rules>
     <operatingEnvironment>
         <gatewayName>hk-innovation-prod</gatewayName>
-        <listenPorts>
-            <insecure>
-                <listenPort>7102</listenPort>
-            </insecure>
-        </listenPorts>
     </operatingEnvironment>
 </gateway>

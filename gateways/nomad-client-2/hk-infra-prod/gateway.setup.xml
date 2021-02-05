@@ -83,10 +83,5 @@
     </rules>
     <operatingEnvironment>
         <gatewayName>hk-infra-prod</gatewayName>
-        <listenPorts>
-            <insecure>
-                <listenPort>7101</listenPort>
-            </insecure>
-        </listenPorts>
     </operatingEnvironment>
 </gateway>
