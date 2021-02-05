@@ -37,7 +37,7 @@ git ls-files --modified \
 
 git status >> $BASE_DIR/$LOG
 
-git commit --message=$_COMMENT --author="$fu <$su@$w>" 2>&1 >> $BASE_DIR/$LOG
+git commit -m "$_COMMENT" --author="$fu <$su@$w>" 2>&1 >> $BASE_DIR/$LOG
 
 git push origin master
 
