@@ -8,7 +8,7 @@ cd $BASE_DIR
 env > validate.log
 
 echo "<validation><issues>"
-echo "<issue><severity>Critical</severity><path>/gateway/operatingEnvironment/httpConnectionRequirements</path><message>Custom critical validation error</message></issue>"
+#echo "<issue><severity>Critical</severity><path>/gateway/operatingEnvironment/httpConnectionRequirements</path><message>Custom critical validation error</message></issue>"
 echo "<issue><severity>Warning</severity><path>/gateway/operatingEnvironment/httpConnectionRequirements</path><message>Custom warning validation error</message></issue>"
 
 echo "</issues></validation>"
