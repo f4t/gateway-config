@@ -5,33 +5,47 @@ LOG=post-setup-apply.log
 cd $BASE_DIR
 
 echo "$(date) - Post-setup apply" > $LOG
+
 env >> $LOG
+
+if [[ "$_COMMENT"  == "Gateway Startup" ]]; then
+  # Gateway just started - nothing to do.
+  exit 0
+elif [[ "$_COMMENT"  == "" ]]; then
+  _COMMENT="Comment missing"
+fi
+
+if [[ "$_USER" == "" ]]; then
+  _USER="unknown"
+fi
+
+if [[ "$_WORKSTATION" == "" ]]; then
+  _WORKSTATION="unknown"
+fi
+
+w=$_WORKSTATION
+fu=$_USER
+su=${fu#*\\}
+
+cd ${GATEWAY_REPO_PATH}
+
+# Stage changed files from gateway:
+# Will include gateway setup, include files and snooze/user assignment data
+git ls-files --modified \
+  | egrep "^(gateways/$HOSTNAME/$NOMAD_META_GATEWAY_NAME|includes/)" \
+  | xargs git add
+
+git status >> $BASE_DIR/$LOG
+
+git commit --message=$_COMMENT --author="$fu <$su@$w>"
+
+git push origin master
+
+if [ $? -lt 1 ]; then
+  rm -f ./gateways/$HOSTNAME/$NOMAD_META_GATEWAY_NAME/gateway.setup.xml*.history
+fi
+
 echo "$(date) - Post-setup apply" >> $LOG
-
-# if [[ "$_COMMENT"  == "" ]]; then
-#   _COMMENT="Comment missing"
-# fi
-# if [[ "$_USER" == "" ]]; then
-#   _USER="unknown"
-# fi
-# if [[ "$_WORKSTATION" == "" ]]; then
-#   _WORKSTATION="unknown"
-# fi
-# w=$_WORKSTATION
-# fu=$_USER
-# su=${fu#*\\}
-
-# if [[ ! -e .git ]]; then 
-#    git init > /dev/null
-# fi
-
-# echo "$_COMMENT" > comment.txt
-# echo "$_FILES" > file-info.xml
-
-# git add *.xml  */*.xml > /dev/null
-
-# git commit --file=comment.txt --author="$fu <$su@$w>" > /dev/null
-# rm comment.txt
 
 # ver=`git log --format="%h" -n 1`
 # echo "<setup><files>"
