@@ -1,87 +1,92 @@
-<gateway compatibility="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://schema.itrsgroup.com/GA5.5.2-210106/gateway.xsd">
-    <probes>
-        <probe name="someserver">
-            <hostname>localhost</hostname>
-            <port>17036</port>
-        </probe>
-    </probes>
-    <managedEntities>
-        <managedEntity name="Some Server">
-            <probe ref="someserver"></probe>
-            <addTypes>
-                <type ref="Infra"></type>
-            </addTypes>
-        </managedEntity>
-    </managedEntities>
-    <types>
-        <type name="Infra">
-            <sampler ref="CPU"></sampler>
-            <sampler ref="Disk"></sampler>
-            <sampler ref="Hardware"></sampler>
-        </type>
-    </types>
-    <samplers>
-        <sampler name="CPU">
-            <var-group>
-                <data>Infra</data>
-            </var-group>
-            <plugin>
-                <cpu></cpu>
-            </plugin>
-        </sampler>
-        <sampler name="Disk">
-            <var-group>
-                <data>Infra</data>
-            </var-group>
-            <plugin>
-                <disk>
-                    <autoDetect>
-                        <data>true</data>
-                    </autoDetect>
-                </disk>
-            </plugin>
-        </sampler>
-        <sampler name="Hardware">
-            <var-group>
-                <data>Infra</data>
-            </var-group>
-            <plugin>
-                <hardware></hardware>
-            </plugin>
-        </sampler>
-    </samplers>
-    <rules>
-        <rule name="CPU">
-            <targets>
-                <target>/geneos/gateway/directory/probe/managedEntity/sampler[(@name=&quot;CPU&quot;)][(@type=&quot;Infra&quot;)]/dataview[(@name=&quot;CPU&quot;)]/rows/row[(@name=&quot;Average_cpu&quot;)]/cell[(@column=&quot;percentUtilisation&quot;)]</target>
-            </targets>
-            <priority>1</priority>
-            <block>
-                <if>
-                    <gt>
-                        <dataItem>
-                            <property>@value</property>
-                        </dataItem>
-                        <integer>90</integer>
-                    </gt>
-                    <transaction>
-                        <delay unit="samples">2</delay>
-                        <update>
-                            <property>state/@severity</property>
-                            <severity>critical</severity>
-                        </update>
-                    </transaction>
-                    <transaction>
-                        <update>
-                            <property>state/@severity</property>
-                            <severity>ok</severity>
-                        </update>
-                    </transaction>
-                </if>
-            </block>
-        </rule>
-    </rules>
-    <operatingEnvironment>
-        <gatewayName>hk-bo-prod</gatewayName>
-    </operatingEnvironment>
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--Edited using Gateway Setup Editor version GA4.13.0-191008 at 2021-02-05 18:10:35 by rema on ubootu-->
+<gateway compatibility="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://schema.itrsgroup.com/GA5.5.1-201216/gateway.xsd">
+	<probes>
+		<probe name="someserver">
+			<hostname>localhost</hostname>
+			<port>17036</port>
+		</probe>
+	</probes>
+	<managedEntities>
+		<managedEntity name="Some Server">
+			<probe ref="someserver"/>
+			<addTypes>
+				<type ref="Infra"/>
+			</addTypes>
+		</managedEntity>
+	</managedEntities>
+	<types>
+		<type name="Infra">
+			<sampler ref="CPU"/>
+			<sampler ref="Disk"/>
+			<sampler ref="Hardware"/>
+		</type>
+	</types>
+	<samplers>
+		<sampler name="CPU">
+			<var-group>
+				<data>Infra</data>
+			</var-group>
+			<plugin>
+				<cpu/>
+			</plugin>
+		</sampler>
+		<sampler name="Disk">
+			<var-group>
+				<data>Infra</data>
+			</var-group>
+			<plugin>
+				<disk>
+					<autoDetect>
+						<data>true</data>
+					</autoDetect>
+				</disk>
+			</plugin>
+		</sampler>
+		<sampler name="Hardware">
+			<var-group>
+				<data>Infra</data>
+			</var-group>
+			<plugin>
+				<hardware/>
+			</plugin>
+		</sampler>
+	</samplers>
+	<rules>
+		<rule name="CPU">
+			<targets>
+				<target>/geneos/gateway/directory/probe/managedEntity/sampler[(@name=&quot;CPU&quot;)][(@type=&quot;Infra&quot;)]/dataview[(@name=&quot;CPU&quot;)]/rows/row[(@name=&quot;Average_cpu&quot;)]/cell[(@column=&quot;percentUtilisation&quot;)]</target>
+			</targets>
+			<priority>1</priority>
+			<block>
+				<if>
+					<gt>
+						<dataItem>
+							<property>@value</property>
+						</dataItem>
+						<integer>90</integer>
+					</gt>
+					<transaction>
+						<delay unit="samples">2</delay>
+						<update>
+							<property>state/@severity</property>
+							<severity>critical</severity>
+						</update>
+					</transaction>
+					<transaction>
+						<update>
+							<property>state/@severity</property>
+							<severity>ok</severity>
+						</update>
+					</transaction>
+				</if>
+			</block>
+		</rule>
+	</rules>
+	<operatingEnvironment>
+		<gatewayName>hk-bo-prod</gatewayName>
+		<selfMonitoring>
+			<disabled>true</disabled>
+		</selfMonitoring>
+	</operatingEnvironment>
 </gateway>
