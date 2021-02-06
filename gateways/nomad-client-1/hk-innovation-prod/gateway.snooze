@@ -1,13 +1,0 @@
-[Item    ] /geneos/gateway[(@name="hk-innovation-prod")]/directory/probe[(@name="hk-innovation-prod Info")]/managedEntity[(@name="hk-innovation-prod Info")]/sampler[(@name="probes")][(@type="")]/dataview[(@name="probes")]/rows/row[(@name="hk-innovation-prod Info")]/cell[(@column="virtual")]
-[User    ] ActiveConsole1
-[Comment ] 
-[Snooze  ] 1612517829 (Fri Feb  5 09:37:09 2021)
-[Period  ] 5 (ValueChanges)
-[Unsnooze] 0 (Thu Jan  1 00:00:00 1970)
-[Severity] 0
-[AllMeOpt] this
-[Value   ] true
-[UntilType] 0
-[UserFullname] ActiveConsole1
-[PivotFormats] 
-
